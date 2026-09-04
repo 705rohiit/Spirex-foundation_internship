@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rohit - Resume</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+  body{background:#e2e8f0;display:flex;justify-content:center;padding:20px;}
+  .resume{width:100%;max-width:800px;background:white;display:flex;box-shadow:0 10px 30px rgba(0,0,0,0.1);border-radius:8px;overflow:hidden;}
+  .left{width:35%;background:#0f172a;color:white;padding:30px 22px;}
+  .right{width:65%;padding:30px 28px;}
+  
+  .profile{text-align:center;margin-bottom:25px;}
+  .avatar{width:90px;height:90px;background:#6366f1;border-radius:50%;margin:0 auto 12px;display:flex;justify-content:center;align-items:center;font-size:36px;font-weight:800;}
+  .profile h1{font-size:22px;letter-spacing:0.5px;}
+  .profile p{font-size:12px;color:#94a3b8;margin-top:4px;text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+
+  .left h3{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:#94a3b8;margin:25px 0 12px;border-bottom:1px solid #1e293b;padding-bottom:6px;}
+  .contact-item{font-size:13px;margin:10px 0;display:flex;gap:10px;align-items:center;color:#cbd5e1;}
+  .contact-item i{color:#6366f1;width:18px;}
+  .skill-box{display:flex;flex-wrap:wrap;gap:7px;}
+  .skill{background:#1e293b;border:1px solid #334155;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:600;color:#e2e8f0;}
+
+  .right h2{font-size:14px;text-transform:uppercase;letter-spacing:1.2px;color:#0f172a;margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .right h2 i{color:#6366f1;}
+  .right h2:first-child{margin-top:0;}
+  .line{width:100%;height:2px;background:#f1f5f9;margin-bottom:15px;}
+  .obj{font-size:13.5px;color:#475569;line-height:1.6;text-align:justify;}
+  .edu h4{font-size:14px;color:#0f172a;}
+  .edu p{font-size:12.5px;color:#64748b;margin:2px 0;}
+  .exp-item{margin-bottom:16px;border-left:3px solid #eef2ff;padding-left:12px;}
+  .exp-item h4{font-size:14px;color:#0f172a;}
+  .exp-item .company{font-size:12px;color:#6366f1;font-weight:700;}
+  .exp-item .desc{font-size:12.5px;color:#475569;margin-top:4px;line-height:1.5;}
+  .proj{margin-bottom:14px;}
+  .proj h4{font-size:13.5px;color:#0f172a;}
+  .proj ul{margin:5px 0 0 16px;font-size:12.5px;color:#475569;line-height:1.5;}
+
+  .print-btn{position:fixed;bottom:20px;right:20px;background:#6366f1;color:white;border:none;padding:12px 20px;border-radius:50px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(99,102,241,0.4);}
+  @media print{
+    body{background:white;padding:0;}
+    .print-btn{display:none;}
+    .resume{box-shadow:none;border-radius:0;}
+  }
+  @media (max-width: 650px){
+    .resume{flex-direction:column;}
+    .left,.right{width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="resume" id="resume">
+  <!-- LEFT -->
+  <div class="left">
+    <div class="profile">
+      <div class="avatar">R</div>
+      <h1>Rohit</h1>
+      <p>Frontend Developer</p>
+    </div>
+
+    <h3>Contact</h3>
+    <div class="contact-item"><i class="fa-solid fa-phone"></i> 7052322593</div>
+    <div class="contact-item"><i class="fa-solid fa-envelope"></i> orhit705@gmail.com</div>
+    <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Lucknow, UP</div>
+
+    <h3>Skills</h3>
+    <div class="skill-box">
+      <span class="skill">HTML5</span>
+      <span class="skill">CSS3</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">Python</span>
+      <span class="skill">React (Basic)</span>
+      <span class="skill">Git & GitHub</span>
+      <span class="skill">Responsive Design</span>
+    </div>
+
+    <h3>Education</h3>
+    <div class="edu">
+      <h4 style="color:white;font-size:13px;">B.Tech - Computer Science & Engineering</h4>
+      <p style="color:#94a3b8;">Dr. APJ Abdul Kalam Technical University, Lucknow</p>
+      <p style="color:#64748b;font-size:11px;margin-top:4px;">2022 - 2026</p>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <h2><i class="fa-solid fa-bullseye"></i> Objective</h2>
+    <div class="line"></div>
+    <p class="obj">Motivated Computer Science Engineering student with strong foundation in Frontend Development. Passionate about building responsive and user-friendly web applications using HTML, CSS, and JavaScript. Seeking a Frontend Developer role to apply my skills and grow with an innovative organization.</p>
+
+    <h2><i class="fa-solid fa-user"></i> About Me</h2>
+    <div class="line"></div>
+    <p class="obj">I am Rohit, a B.Tech CSE student from AKTU Lucknow. I am a Frontend Developer who loves to convert ideas into real websites. I enjoy learning new technologies and building practical projects.</p>
+
+    <h2><i class="fa-solid fa-briefcase"></i> Experience</h2>
+    <div class="line"></div>
+    <div class="exp-item">
+      <h4>Frontend Development Intern</h4>
+      <p class="company">Spirex Foundation | Internship</p>
+      <p class="desc">Worked on responsive web pages, improved UI components using HTML, CSS, JavaScript. Collaborated with team to build user-centric designs.</p>
+    </div>
+
+    <h2><i class="fa-solid fa-diagram-project"></i> Projects</h2>
+    <div class="line"></div>
+    <div class="proj">
+      <h4>1. E-Commerce Website</h4>
+      <ul>
+        <li>Built a fully responsive e-commerce front-end with product listing, cart and checkout pages.</li>
+        <li><b>Tech Stack:</b> HTML, CSS, JavaScript</li>
+      </ul>
+    </div>
+    <div class="proj">
+      <h4>2. Student Portfolio Card</h4>
+      <ul>
+        <li>Designed a modern digital portfolio card with dark mode and skill progress animation.</li>
+        <li><b>Tech Stack:</b> HTML, CSS, JavaScript</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<button class="print-btn" onclick="window.print()"><i class="fa-solid fa-download"></i> Download PDF</button>
+
+</body>
+</html>
