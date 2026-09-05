@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Off-Canvas Navigation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: #87CEEB;
+      min-height: 100vh;
+    }
+
+    /* Fixed Glassmorphism Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0f172a;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #2563eb;
+    }
+
+    /* Desktop Navigation */
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #475569;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #2563eb;
+    }
+
+    /* Hamburger Button */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      z-index: 102;
+    }
+
+    .bar {
+      width: 24px;
+      height: 2px;
+      background-color: #0f172a;
+      transition: all 0.3s ease-in-out;
+      border-radius: 2px;
+    }
+
+    /* Backdrop Overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 98;
+    }
+
+    /* Mobile Off-Canvas Menu */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        padding: 6rem 2rem 2rem;
+        gap: 1.5rem;
+        box-shadow: -10px 0 25px rgba(0, 0, 0, 0.05);
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 99;
+      }
+
+      /* Active State Toggle */
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Hamburger Transformation to X */
+      .hamburger.active .bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="#" class="logo">ROHIT<span>.</span></a>
+
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="#" class="nav-link">Home</a></li>
+        <li><a href="#" class="nav-link">Portfolio</a></li>
+        <li><a href="#" class="nav-link">About</a></li>
+        <li><a href="#" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="hamburger" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </header>
+
+  <div class="overlay"></div>
+
+  <script>
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+    const overlay = document.querySelector(".overlay");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    function toggleMenu() {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+      overlay.classList.toggle("active");
+    }
+
+    hamburger.addEventListener("click", toggleMenu);
+    overlay.addEventListener("click", toggleMenu);
+
+    // Close menu when clicking links
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        if (navMenu.classList.contains("active")) toggleMenu();
+      });
+    });
+  </script>
+
+</body>
+</html>
