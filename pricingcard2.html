@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recharge Pricing Section</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .pricing-container {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      color: #94a3b8;
+      font-size: 1rem;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      align-items: center;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #6366f1;
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.15);
+    }
+
+    .card.featured {
+      background: linear-gradient(180deg, #1e1b4b 0%, #1e293b 100%);
+      border: 2px solid #6366f1;
+    }
+
+    .badge {
+      position: absolute;
+      top: -14px;
+      right: 24px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .plan-header {
+      border-bottom: 1px solid #334155;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .plan-title {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .price-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .price {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .validity {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      background: #334155;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-left: auto;
+      font-weight: 500;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: #0f172a;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .metric-item small {
+      display: block;
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+
+    .metric-item span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .perks-list {
+      list-style: none;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .perks-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+    }
+
+    .perks-list li svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: #22c55e;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background-color: #334155;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+    }
+
+    .btn:hover {
+      background-color: #475569;
+    }
+
+    .card.featured .btn {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+    }
+
+    .card.featured .btn:hover {
+      opacity: 0.95;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pricing-container">
+    <div class="section-header">
+      <h2>Mobile Recharge Plans</h2>
+      <p>Select the best data and voice pack for your needs</p>
+    </div>
+
+    <div class="plans-grid">
+      <div class="card">
+        <div class="plan-header">
+          <div class="plan-title">Basic Saver</div>
+          <div class="price-wrap">
+            <div class="price">299</div>
+            <span class="validity">28 Days</span>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <small>Data</small>
+            <span>1 GB/day</span>
+          </div>
+          <div class="metric-item">
+            <small>Calls</small>
+            <span>Unlimited</span>
+          </div>
+          <div class="metric-item">
+            <small>SMS</small>
+            <span>100/day</span>
+          </div>
+        </div>
+
+        <ul class="perks-list">
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Free National Roaming
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Standard Network Speed
+          </li>
+        </ul>
+
+        <a href="#" class="btn">Recharge Now</a>
+      </div>
+
+      <div class="card featured">
+        <div class="badge">Most Popular</div>
+        <div class="plan-header">
+          <div class="plan-title">Hero Unlimited</div>
+          <div class="price-wrap">
+            <div class="price">599</div>
+            <span class="validity">56 Days</span>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <small>Data</small>
+            <span>2.5 GB/day</span>
+          </div>
+          <div class="metric-item">
+            <small>Calls</small>
