@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonials Carousel</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .testimonials {
+      max-width: 1000px;
+      margin: 50px auto;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .testimonials h2 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .testimonial-card {
+      flex: 0 0 100%;
+      box-sizing: border-box;
+      padding: 25px;
+      background: #fff;
+      margin: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .testimonial-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-card p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .testimonial-card h4 {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: #222;
+    }
+
+    .testimonial-card span {
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    /* Navigation arrows */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .arrow:hover {
+      background: #0056b3;
+    }
+
+    .arrow.left { left: 10px; }
+    .arrow.right { right: 10px; }
+
+    /* Dots */
+    .dots {
+      margin-top: 15px;
+    }
+
+    .dots span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .dots .active {
+      background: #007bff;
+    }
+
+    @media (max-width: 600px) {
+      .testimonial-card {
+        font-size: 0.9rem;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="carousel" id="carousel">
+      <div class="carousel-inner" id="carouselInner">
+        <div class="testimonial-card">
+          <img src="https://via.placeholder.com/80" alt="Priya">
+          <p>"Good and afordable product ."</p>
+          <h4>Priya Sharma</h4>
+          <span>Entrepreneur</span>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://via.placeholder.com/80" alt="Rohit">
+          <p>"The product quality is top-notch. I had a smooth and satisfying experience."</p>
+          <h4>Rohit Kumar</h4>
+          <span>Software Engineer</span>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://via.placeholder.com/80" alt="Anjali">
+          <p>"Affordable, reliable, and user-friendly. Highly recommended!"</p>
+          <h4>Anjali Verma</h4>
+          <span>Designer</span>
+        </div>
+      </div>
+      <button class="arrow left" onclick="prevSlide()">&#10094;</button>
+      <button class="arrow right" onclick="nextSlide()">&#10095;</button>
+    </div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <script>
+    const inner = document.getElementById('carouselInner');
+    const cards = document.querySelectorAll('.testimonial-card');
+    const dotsContainer = document.getElementById('dots');
+    let index = 0;
+    let autoSlide;
+
+    // Create dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll('span');
+
+    function showSlide(i) {
+      inner.style.transform = `translateX(-${i * 100}%)`;
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[i].classList.add('active');
+    }
+
+    function nextSlide() {
+      index = (index + 1) % cards.length;
+      showSlide(index);
+    }
+
+    function prevSlide() {
+      index = (index - 1 + cards.length) % cards.length;
+      showSlide(index);
+    }
+
+    function goToSlide(i) {
+      index = i;
+      showSlide(index);
+    }
+
+    function startAutoSlide() {
+      autoSlide = setInterval(nextSlide, 4000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlide);
+    }
+
+    // Init
+    showSlide(index);
+    startAutoSlide();
+
+    // Pause on hover
+    inner.addEventListener('mouseenter', stopAutoSlide);
+    inner.addEventListener('mouseleave', startAutoSlide);
+  </script>
+</body>
+</html>
