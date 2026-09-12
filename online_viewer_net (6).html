@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Currency Converter</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  background: radial-gradient(800px 400px at 0% 0%, #7c3aed33, transparent),
+              radial-gradient(800px 400px at 100% 100%, #06b6d433, transparent),
+              #0f0f12;
+  color:#fff;
+  padding:20px;
+}
+.card{
+  width:420px;
+  max-width:95vw;
+  background:#18181b;
+  border:1px solid #2a2a2e;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+h2{font-size:22px;font-weight:700;margin-bottom:6px}
+.sub{font-size:13px;opacity:.6;margin-bottom:22px}
+.amount{margin-bottom:20px}
+.amount label{font-size:12px;opacity:.6;letter-spacing:1px}
+.amount input{
+  width:100%;
+  margin-top:8px;
+  background:#232326;
+  border:1px solid #2e2e32;
+  color:#fff;
+  font-size:32px;
+  font-weight:700;
+  padding:14px 16px;
+  border-radius:14px;
+  outline:none;
+}
+.row{display:flex;gap:12px;align-items:center;margin-bottom:20px}
+.select{
+  flex:1;
+  background:#232326;
+  border:1px solid #2e2e32;
+  border-radius:14px;
+  padding:12px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.select select{
+  background:transparent;
+  border:none;
+  color:#fff;
+  font-size:15px;
+  font-weight:600;
+  width:100%;
+  outline:none;
+}
+.select select option{background:#18181b}
+.flag{font-size:22px}
+.swap{
+  width:44px;height:44px;
+  border-radius:50%;
+  background:#fff;
+  color:#000;
+  border:none;
+  font-size:20px;
+  cursor:pointer;
+  transition:.2s;
+  flex-shrink:0;
+}
+.swap:hover{transform:rotate(180deg)}
+.result{
+  background:linear-gradient(135deg,#7c3aed,#4f46e5);
+  border-radius:16px;
+  padding:18px;
+  text-align:center;
+  margin-bottom:16px;
+}
+.result h3{font-size:28px;font-weight:700}
+.result p{font-size:12px;opacity:.8;margin-top:4px}
+button.convert{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  background:#fff;
+  color:#000;
+  font-weight:700;
+  font-size:15px;
+  cursor:pointer;
+}
+.rate{font-size:12px;opacity:.5;text-align:center;margin-top:12px}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Currency Converter</h2>
+  <p class="sub">Live exchange rates • Fast & simple</p>
+
+  <div class="amount">
+    <label>AMOUNT</label>
+    <input type="number" id="amount" value="100">
+  </div>
+
+  <div class="row">
+    <div class="select">
+      <span class="flag" id="flagFrom">🇺🇸</span>
+      <select id="from">
+        <option value="USD" selected>USD</option>
+        <option value="INR">INR</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="JPY">JPY</option>
+        <option value="AUD">AUD</option>
+        <option value="CAD">CAD</option>
+        <option value="AED">AED</option>
+      </select>
+    </div>
+
+    <button class="swap" id="swap">⇅</button>
+
+    <div class="select">
+      <span class="flag" id="flagTo">🇮🇳</span>
+      <select id="to">
+        <option value="USD">USD</option>
+        <option value="INR" selected>INR</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="JPY">JPY</option>
+        <option value="AUD">AUD</option>
+        <option value="CAD">CAD</option>
+        <option value="AED">AED</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="result">
+    <h3 id="result">₹ 8,350.00</h3>
+    <p id="resultText">100 USD = 8350 INR</p>
+  </div>
+
+  <button class="convert" onclick="convert()">Convert Now</button>
+  <p class="rate" id="rateInfo">1 USD = 83.50 INR • Updated just now</p>
+</div>
+
+<script>
+const flags = {USD:'🇺🇸', INR:'🇮🇳', EUR:'🇪🇺', GBP:'🇬🇧', JPY:'🇯🇵', AUD:'🇦🇺', CAD:'🇨🇦', AED:'🇦🇪'};
+const amount = document.getElementById('amount');
+const from = document.getElementById('from');
+const to = document.getElementById('to');
+const result = document.getElementById('result');
+const resultText = document.getElementById('resultText');
+const rateInfo = document.getElementById('rateInfo');
+
+let rates = { USD:1, INR:83.5, EUR:0.92, GBP:0.79, JPY:155.2, AUD:1.52, CAD:1.36, AED:3.67 };
+
+async function fetchRates(){
+  try{
+    const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    const data = await res.json();
+    rates = data.rates;
+    convert();
+    rateInfo.textContent = `Live rates from exchangerate-api • Updated just now`;
+  }catch(e){
+    rateInfo.textContent = `Offline rates used • 1 USD = 83.5 INR`;
+  }
+}
+
+function convert(){
+  const amt = parseFloat(amount.value) || 0;
+  const fromRate = rates[from.value];
+  const toRate = rates[to.value];
+  // Convert via USD base
+  const usdAmount = amt / fromRate;
+  const converted = usdAmount * toRate;
+  
+  const formatter = new Intl.NumberFormat('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
+  result.textContent = `${to.value} ${formatter.format(converted)}`;
+  resultText.textContent = `${amt} ${from.value} = ${formatter.format(converted)} ${to.value}`;
+  
+  const oneUnit = (1/fromRate * toRate).toFixed(4);
+  rateInfo.textContent = `1 ${from.value} = ${oneUnit} ${to.value}`;
+  
+  document.getElementById('flagFrom').textContent = flags[from.value];
+  document.getElementById('flagTo').textContent = flags[to.value];
+}
+
+document.getElementById('swap').onclick = () => {
+  const temp = from.value;
+  from.value = to.value;
+  to.value = temp;
+  convert();
+};
+
+from.onchange = convert;
+to.onchange = convert;
+amount.oninput = convert;
+
+fetchRates();
+convert();
+</script>
+</body>
+</html>
