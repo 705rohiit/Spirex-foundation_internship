@@ -1,0 +1,33 @@
+const apiKey = 'YOUR_API_KEY';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
+document.getElementById('searchButton').addEventListener('click', async () => {
+   const city = document.getElementById('cityInput').value.trim();
+
+   if (!city) {
+       alert("Please enter a city name!");
+       return;
+   }
+
+   try {
+       const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
+
+       if (!response.ok) {
+           throw new Error("City not found");
+       }
+
+       const data = await response.json();
+
+       // Data show karo
+       document.getElementById('cityName').textContent = data.name;
+       document.getElementById('temperature').textContent = `${Math.round(data.main.temp)}°C`;
+       document.getElementById('description').textContent = data.weather[0].description;
+       document.getElementById('humidity').textContent = `Humidity: ${data.main.humidity}%`;
+
+   } catch (error) {
+       console.error('Error:', error);
+       document.getElementById('cityName').textContent = "City not found!";
+       document.getElementById('temperature').textContent = "--";
+       document.getElementById('description').textContent = "Try again with correct name";
+   }
+});
