@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NewHospital | Hospital Appointment</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="logo">MediCare<span>+</span></div>
+  <div>
+    <a href="#doctors">Doctors</a>
+    <a href="#services">Services</a>
+    <a href="#book">Book Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Your Health, <span>Our Priority</span></h1>
+    <p>View top specialists, check available services, and book your appointment in 30 seconds.</p>
+    <button class="btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Appointment</button>
+  </div>
+  <div class="hero-img">
+    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800" alt="Hospital">
+  </div>
+</section>
+
+<section id="doctors" class="section">
+  <div class="section-title"><h2>Our Expert Doctors</h2><p class="muted">Choose from experienced specialists</p></div>
+  <div class="grid" id="doctorGrid"></div>
+</section>
+
+<section id="services" class="section bg-white">
+  <div class="section-title"><h2>Our Services</h2></div>
+  <div class="grid">
+    <div class="card"><div class="service-icon">🩺</div><h3>General Consultation</h3><p class="muted">Complete health checkup and diagnosis.</p></div>
+    <div class="card"><div class="service-icon">❤️</div><h3>Cardiology</h3><p class="muted">Heart care with advanced ECG & Echo.</p></div>
+    <div class="card"><div class="service-icon">🦷</div><h3>Dental Care</h3><p class="muted">Pain-free dental treatments.</p></div>
+    <div class="card"><div class="service-icon">🧠</div><h3>Neurology</h3><p class="muted">Brain & nervous system specialists.</p></div>
+    <div class="card"><div class="service-icon">👶</div><h3>Pediatrics</h3><p class="muted">Best care for your children.</p></div>
+    <div class="card"><div class="service-icon">🩻</div><h3>Diagnostics</h3><p class="muted">X-Ray, MRI, Blood Tests & more.</p></div>
+  </div>
+</section>
+
+<section id="book" class="section">
+  <div class="section-title"><h2>Book an Appointment</h2></div>
+  <div class="form-wrap">
+    <div class="form-row">
+      <input type="text" id="pName" placeholder="Full Name" required>
+      <input type="tel" id="pPhone" placeholder="Phone Number" required>
+    </div>
+    <input type="email" id="pEmail" placeholder="Email Address">
+    <div class="form-row">
+      <select id="pDoctor"></select>
+      <input type="date" id="pDate" required>
+    </div>
+    <select id="pTime">
+      <option value="">Select Time Slot</option>
+      <option>09:00 AM - 10:00 AM</option>
+      <option>10:00 AM - 11:00 AM</option>
+      <option>11:30 AM - 12:30 PM</option>
+      <option>02:00 PM - 03:00 PM</option>
+      <option>04:00 PM - 05:00 PM</option>
+    </select>
+    <textarea id="pReason" rows="3" placeholder="Reason for visit"></textarea>
+    <button class="btn full" onclick="bookAppointment()">Confirm Booking</button>
+    <div class="success" id="successMsg">✅ Appointment Booked Successfully! We will contact you shortly.</div>
+    <div id="appointmentList"></div>
+  </div>
+</section>
+
+<footer>© 2026 MediCare+ Hospital | Made with HTML, CSS & JavaScript</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

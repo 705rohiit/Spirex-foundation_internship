@@ -1,0 +1,59 @@
+const doctors = [
+  {name:"Dr. Ananya Sharma", spec:"Cardiologist", exp:"12 Years", img:"https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400"},
+  {name:"Dr. Raj Verma", spec:"Neurologist", exp:"10 Years", img:"https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400"},
+  {name:"Dr. Neha Patel", spec:"Pediatrician", exp:"8 Years", img:"https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=400"},
+  {name:"Dr. Aman Singh", spec:"Dentist", exp:"9 Years", img:"https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400"}
+];
+
+const doctorGrid = document.getElementById('doctorGrid');
+const pDoctor = document.getElementById('pDoctor');
+
+// Populate doctor dropdown
+pDoctor.innerHTML = '<option value="">Select Doctor</option>' + doctors.map(d=>`<option>${d.name} - ${d.spec}</option>`).join('');
+
+// Render doctor cards
+doctorGrid.innerHTML = doctors.map((d,i)=>`
+  <div class="card">
+    <img src="${d.img}">
+    <span class="badge">${d.spec}</span>
+    <h3>${d.name}</h3>
+    <p class="muted" style="font-size:14px">${d.exp} Experience</p>
+    <button class="btn full" style="margin-top:10px" onclick="selectDoctor(${i})">Book Now</button>
+  </div>
+`).join('');
+
+function selectDoctor(i){
+  pDoctor.selectedIndex = i+1;
+  document.getElementById('book').scrollIntoView({behavior:'smooth'});
+}
+
+function bookAppointment(){
+  const name = document.getElementById('pName').value;
+  const doctor = pDoctor.value;
+  const date = document.getElementById('pDate').value;
+  const time = document.getElementById('pTime').value;
+
+  if(!name || !doctor || !date || !time){ 
+    alert('Please fill all required fields'); 
+    return; 
+  }
+  
+  const appt = {name, doctor, date, time};
+  let list = JSON.parse(localStorage.getItem('appointments')||'[]');
+  list.push(appt);
+  localStorage.setItem('appointments', JSON.stringify(list));
+  
+  document.getElementById('successMsg').style.display='block';
+  renderAppointments();
+  setTimeout(()=> document.getElementById('successMsg').style.display='none', 3000);
+}
+
+function renderAppointments(){
+  let list = JSON.parse(localStorage.getItem('appointments')||'[]');
+  if(list.length==0) return;
+  document.getElementById('appointmentList').innerHTML = 
+    '<h4>Your Bookings:</h4>' + 
+    list.map(a=>`<p style="background:#f1f5f9;padding:8px 12px;border-radius:6px;margin-top:6px;font-size:14px">👤 ${a.name} | ${a.doctor} | ${a.date} at ${a.time}</p>`).join('');
+}
+
+renderAppointments();
