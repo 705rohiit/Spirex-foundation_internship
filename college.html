@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEC Rewa - Govt. Engineering College</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0f4c81;--secondary:#ff9800;--bg:#f5f7fb;--card:#fff;--text:#1f2937}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:var(--bg);color:var(--text)}
+.bg-gray{background:#eef2f7}
+.top-bar{background:#002855;color:#fff;text-align:center;padding:8px;font-size:13px}
+nav{position:sticky;top:0;z-index:10;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 7%;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.logo{font-weight:700;font-size:24px;color:var(--primary)} .logo span{color:var(--secondary)}
+.menu a{margin-left:20px;text-decoration:none;font-weight:600;color:#374151} .menu a:hover{color:var(--primary)}
+.hero{background:linear-gradient(135deg,#0f4c81,#1e88e5);color:#fff;padding:70px 7%;display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between;align-items:center}
+.hero-text h1{font-size:42px;line-height:1.1} .hero-text h1 span{color:var(--secondary)}
+.hero-text p{margin:16px 0 24px;opacity:.9;font-size:18px}
+.btn{padding:12px 22px;background:var(--secondary);border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer}
+.btn-outline{padding:12px 22px;background:transparent;border:2px solid #fff;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;margin-left:10px}
+.stats{display:flex;gap:20px;flex-wrap:wrap} .stats div{background:rgba(255,255,255,.15);padding:18px 24px;border-radius:12px;text-align:center;min-width:110px}
+.stats h2{font-size:28px;color:var(--secondary)}
+.notice-bar{background:#fff3cd;color:#856404;padding:10px;text-align:center;font-weight:600;border-bottom:2px solid #ffeeba;overflow:hidden}
+.notice-bar span{animation:scroll 25s linear infinite;display:inline-block;white-space:nowrap}
+@keyframes scroll{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.section{padding:60px 7%} .title{text-align:center;margin-bottom:30px} .title h2{font-size:32px;color:var(--primary)} .title p{color:#6b7280}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:var(--card);border-radius:14px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);transition:.2s}
+.card:hover{transform:translateY(-5px)} .card img{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:12px}
+.badge{background:#e0f2fe;color:var(--primary);padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600}
+.course-table-wrap{overflow-x:auto;background:#fff;border-radius:12px;padding:10px}
+.course-table{width:100%;border-collapse:collapse} .course-table th,.course-table td{padding:14px;text-align:left;border-bottom:1px solid #e5e7eb}
+.course-table th{background:var(--primary);color:#fff} .course-table tr:hover{background:#f1f5f9}
+.student-flex{display:flex;flex-wrap:wrap;gap:24px}
+.form-card{flex:1;min-width:300px;background:#fff;padding:24px;border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.form-card input{width:100%;padding:12px;border:1px solid #d1d5db;border-radius:8px;margin-top:12px}
+.info-cards{flex:1;min-width:300px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.s-card{background:#fff;padding:20px;border-radius:14px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.06)} .s-card span{font-size:32px}
+.student-item{background:#f9fafb;padding:10px 12px;border-radius:8px;margin-top:8px;display:flex;justify-content:space-between;font-size:14px}
+footer{background:#002855;color:#cbd5e1;text-align:center;padding:24px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header class="top-bar">🇮🇳 Govt. Engineering College, Rewa (M.P.) | Approved by AICTE | Affiliated to RGPV Bhopal</header>
+
+<nav>
+  <div class="logo">GEC<span> REWA</span></div>
+  <div class="menu">
+    <a href="#departments">Departments</a>
+    <a href="#courses">Courses</a>
+    <a href="#faculty">Faculty</a>
+    <a href="#students">Students</a>
+    <a href="#events">Events</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Govt. Engineering College <span>Rewa</span></h1>
+    <p>Empowering Future Engineers with Quality Technical Education Since 2005</p>
+    <button class="btn" onclick="document.getElementById('departments').scrollIntoView({behavior:'smooth'})">Explore Departments</button>
+    <button class="btn-outline" onclick="document.getElementById('students').scrollIntoView({behavior:'smooth'})">Student Portal</button>
+  </div>
+  <div class="stats">
+    <div><h2>6</h2><p>Departments</p></div>
+    <div><h2>1200+</h2><p>Students</p></div>
+    <div><h2>85+</h2><p>Faculty</p></div>
+    <div><h2>90%</h2><p>Placement</p></div>
+  </div>
+</section>
+
+<div class="notice-bar"><span>📢 Notice: Admission Open 2026-27 | End Sem Exam Time Table Released | Scholarship Forms Available | Tech Fest INNOVISION Registration Open</span></div>
+
+<section id="departments" class="section">
+  <div class="title"><h2>Our Departments</h2><p>Core branches of engineering</p></div>
+  <div class="grid" id="deptGrid"></div>
+</section>
+
+<section id="courses" class="section bg-gray">
+  <div class="title"><h2>Courses Offered</h2></div>
+  <div class="course-table-wrap">
+    <table class="course-table">
+      <thead><tr><th>Course</th><th>Branch</th><th>Duration</th><th>Intake</th><th>Eligibility</th></tr></thead>
+      <tbody id="courseBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="faculty" class="section">
+  <div class="title"><h2>Our Faculty</h2><p>Experienced & Highly Qualified</p></div>
+  <div class="grid" id="facultyGrid"></div>
+</section>
+
+<section id="students" class="section bg-gray">
+  <div class="title"><h2>Student Corner</h2></div>
+  <div class="student-flex">
+    <div class="form-card">
+      <h3>Student Search</h3>
+      <input type="text" id="searchStudent" placeholder="Enter Name / Roll No" onkeyup="searchStudent()">
+      <div id="studentList"></div>
+    </div>
+    <div class="info-cards">
+      <div class="s-card"><span>📚</span><h4>Library</h4><p>50000+ Books</p></div>
+      <div class="s-card"><span>🏫</span><h4>Hostel</h4><p>Boys & Girls</p></div>
+      <div class="s-card"><span>💼</span><h4>Placement</h4><p>TCS, Infosys, Wipro</p></div>
+      <div class="s-card"><span>🎓</span><h4>Scholarship</h4><p>MP Govt. Scheme</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="events" class="section">
+  <div class="title"><h2>Events & News</h2></div>
+  <div class="grid" id="eventGrid"></div>
+</section>
+
+<footer>
+  <p>© 2026 Govt. Engineering College Rewa | Made with HTML, CSS, JS</p>
+  <p>Contact: gecrewa@mp.gov.in | +91 7662-255XXX</p>
+</footer>
+
+<script>
+const departments=[
+{name:"Computer Science & Engineering",code:"CSE",icon:"💻",intake:90,hod:"Dr. S.K. Mishra"},
+{name:"Electronics & Communication",code:"ECE",icon:"📡",intake:60,hod:"Dr. R.K. Gupta"},
+{name:"Mechanical Engineering",code:"ME",icon:"⚙️",intake:60,hod:"Prof. A. Singh"},
+{name:"Civil Engineering",code:"CE",icon:"🏗️",intake:60,hod:"Dr. P. Tiwari"},
+{name:"Electrical Engineering",code:"EE",icon:"🔌",intake:60,hod:"Dr. V. Sharma"},
+{name:"Information Technology",code:"IT",icon:"🌐",intake:60,hod:"Prof. N. Patel"}
+];
+const courses=[
+["B.Tech","CSE","4 Years",90,"12th + JEE Main"],
+["B.Tech","ECE","4 Years",60,"12th + JEE Main"],
+["B.Tech","Mechanical","4 Years",60,"12th + JEE Main"],
+["B.Tech","Civil","4 Years",60,"12th + JEE Main"],
+["B.Tech","Electrical","4 Years",60,"12th + JEE Main"],
+["M.Tech","CSE / Thermal","2 Years",18,"GATE Score"]
+];
+const faculty=[
+{name:"Dr. S.K. Mishra",dept:"CSE",exp:"15 Yrs",img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400"},
+{name:"Prof. Ritu Jain",dept:"ECE",exp:"12 Yrs",img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400"},
+{name:"Dr. P. Tiwari",dept:"Civil",exp:"18 Yrs",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400"},
+{name:"Prof. A. Singh",dept:"Mechanical",exp:"14 Yrs",img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400"}
+];
+const studentsData=[
+{roll:"GECR/2022/CSE/01",name:"Rahul Kushwaha",branch:"CSE",year:"3rd Year"},
+{roll:"GECR/2022/ECE/12",name:"Anjali Singh",branch:"ECE",year:"3rd Year"},
+{roll:"GECR/2023/ME/05",name:"Vikash Yadav",branch:"ME",year:"2nd Year"},
+{roll:"GECR/2021/CE/08",name:"Priya Patel",branch:"CE",year:"4th Year"},
+{roll:"GECR/2023/EE/19",name:"Aman Kumar",branch:"EE",year:"2nd Year"}
+];
+const events=[
+{title:"Tech Fest 2026 - INNOVISION",date:"15 March 2026",desc:"Annual technical festival with coding, robotics and project expo."},
+{title:"Campus Placement Drive",date:"02 Feb 2026",desc:"Placement drive for final year students - TCS & Infosys."},
+{title:"Workshop on AI & ML",date:"20 Jan 2026",desc:"3-day workshop by IIT experts."},
+{title:"MP Scholarship Last Date",date:"30 Jan 2026",desc:"All students fill scholarship form before deadline."}
+];
+
+document.getElementById('deptGrid').innerHTML=departments.map(d=>`
+<div class="card"><div style="font-size:36px">${d.icon}</div><span class="badge">${d.code} - ${d.intake} Seats</span><h3>${d.name}</h3><p style="font-size:13px;color:#6b7280">HOD: ${d.hod}</p><button class="btn" style="margin-top:10px;width:100%">View Details</button></div>
+`).join('');
+document.getElementById('courseBody').innerHTML=courses.map(c=>`<tr><td>${c[0]}</td><td>${c[1]}</td><td>${c[2]}</td><td>${c[3]}</td><td>${c[4]}</td></tr>`).join('');
+document.getElementById('facultyGrid').innerHTML=faculty.map(f=>`
+<div class="card"><img src="${f.img}"><span class="badge">${f.dept}</span><h3>${f.name}</h3><p style="font-size:13px;color:#6b7280">${f.exp} Experience</p></div>
+`).join('');
+document.getElementById('eventGrid').innerHTML=events.map(e=>`
+<div class="card" style="border-left:5px solid #0f4c81"><span class="badge">${e.date}</span><h3 style="margin:10px 0">${e.title}</h3><p style="font-size:14px;color:#6b7280">${e.desc}</p></div>
+`).join('');
+
+function renderStudents(list){
+document.getElementById('studentList').innerHTML=list.map(s=>`<div class="student-item"><span><b>${s.name}</b><br><small>${s.roll}</small></span><span>${s.branch}<br><small>${s.year}</small></span></div>`).join('');
+}
+renderStudents(studentsData);
+function searchStudent(){
+let q=document.getElementById('searchStudent').value.toLowerCase();
+let filtered=studentsData.filter(s=>s.name.toLowerCase().includes(q)||s.roll.toLowerCase().includes(q));
+renderStudents(filtered);
+}
+</script>
+</body>
+</html>
