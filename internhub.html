@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InternHub - Student Internship Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#6366f1;--pd:#4f46e5;--bg:#f8fafc;--card:#fff;--text:#0f172a;--muted:#64748b;--ok:#10b981}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:var(--bg);color:var(--text)}
+nav{position:sticky;top:0;z-index:20;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 7%;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.logo{font-weight:800;font-size:22px;color:var(--p)} .logo span{color:var(--text)}
+.nav-links{display:flex;gap:18px;align-items:center}
+.btn{padding:10px 18px;border-radius:8px;border:none;background:var(--p);color:#fff;font-weight:600;cursor:pointer} .btn:hover{background:var(--pd)}
+.btn-ghost{background:#eef2ff;color:var(--p)}
+.hero{display:flex;flex-wrap:wrap;align-items:center;padding:50px 7%;gap:30px;background:linear-gradient(135deg,#eef2ff,#fff)}
+.hero h1{font-size:44px;line-height:1.1} .hero h1 span{color:var(--p)} .hero p{color:var(--muted);margin:14px 0 20px;font-size:18px}
+.search-bar{background:#fff;display:flex;gap:8px;padding:8px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.08);max-width:650px}
+.search-bar input,.search-bar select{flex:1;padding:12px;border:1px solid #e2e8f0;border-radius:8px}
+.section{padding:50px 7%} .title{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.card{background:var(--card);border-radius:16px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);transition:.2s;position:relative}
+.card:hover{transform:translateY(-4px)}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-right:6px}
+.b-paid{background:#dcfce7;color:#15803d} .b-remote{background:#dbeafe;color:#1d4ed8} .b-part{background:#fef9c3;color:#a16207}
+.company{display:flex;gap:12px;align-items:center;margin:12px 0} .company img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.meta{color:var(--muted);font-size:13px;margin:8px 0} .meta span{margin-right:12px}
+.skill{border:1px solid #e2e8f0;padding:4px 8px;border-radius:20px;font-size:12px;margin:3px;display:inline-block}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;justify-content:center;align-items:center;z-index:99;padding:20px}
+.modal-box{background:#fff;width:100%;max-width:600px;border-radius:16px;padding:24px;max-height:90vh;overflow:auto}
+.modal-box input,.modal-box textarea{width:100%;padding:11px;margin:8px 0 14px;border:1px solid #e2e8f0;border-radius:8px}
+.close{float:right;font-size:22px;cursor:pointer}
+.track-item{background:#fff;padding:14px 16px;border-radius:10px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.status{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.s-pending{background:#fef9c3;color:#a16207} .s-accepted{background:#dcfce7;color:#15803d} .s-rejected{background:#fee2e2;color:#b91c1c}
+.tabs{display:flex;gap:10px;margin-bottom:16px} .tab{padding:8px 16px;border-radius:20px;border:1px solid #e2e8f0;background:#fff;cursor:pointer} .tab.active{background:var(--p);color:#fff;border-color:var(--p)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">InternHub<span>.io</span></div>
+  <div class="nav-links">
+    <span id="appliedCount" style="font-weight:700;color:var(--p)">0 Applied</span>
+    <button class="btn-ghost btn" onclick="scrollToTrack()">My Applications</button>
+    <button class="btn" onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})">Explore</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div style="flex:1;min-width:300px">
+    <h1>Find Your <span>Dream Internship</span> Today</h1>
+    <p>5000+ internships from top companies - Google, Microsoft, Amazon & Startups</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search role e.g. Web Developer" onkeyup="renderInternships()">
+      <select id="filterType" onchange="renderInternships()">
+        <option value="">All Types</option>
+        <option>Remote</option><option>Onsite</option><option>Hybrid</option>
+      </select>
+      <button class="btn" onclick="renderInternships()">Search</button>
+    </div>
+  </div>
+  <div style="flex:1;min-width:280px;text-align:center">
+    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600" style="width:100%;border-radius:20px">
+  </div>
+</section>
+
+<section id="explore" class="section">
+  <div class="title"><h2>Latest Internships</h2>
+    <div class="tabs">
+      <button class="tab active" onclick="filterCat('All',this)">All</button>
+      <button class="tab" onclick="filterCat('Tech',this)">Tech</button>
+      <button class="tab" onclick="filterCat('Marketing',this)">Marketing</button>
+      <button class="tab" onclick="filterCat('Design',this)">Design</button>
+    </div>
+  </div>
+  <div class="grid" id="internGrid"></div>
+</section>
+
+<section id="track" class="section" style="background:#eef2ff">
+  <div class="title"><h2>📊 My Applications</h2><button class="btn-ghost btn" onclick="clearApplications()">Clear All</button></div>
+  <div id="trackList"></div>
+</section>
+
+<div class="modal" id="detailModal">
+  <div class="modal-box">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="modal" id="applyModal">
+  <div class="modal-box">
+    <span class="close" onclick="closeApply()">&times;</span>
+    <h2>Apply for Internship</h2>
+    <p id="applyFor" style="color:var(--p);font-weight:600;margin:6px 0"></p>
+    <input type="text" id="sName" placeholder="Full Name *">
+    <input type="email" id="sEmail" placeholder="Email *">
+    <input type="text" id="sCollege" placeholder="College Name">
+    <input type="text" id="sResume" placeholder="Resume Link (Drive / LinkedIn)">
+    <textarea id="sCover" rows="3" placeholder="Why should we hire you?"></textarea>
+    <button class="btn" style="width:100%" onclick="submitApplication()">Submit Application</button>
+  </div>
+</div>
+
+<script>
+const internships=[
+{id:1,role:"Frontend Developer Intern",company:"Google",logo:"https://logo.clearbit.com/google.com",type:"Remote",stipend:"₹25,000/month",duration:"3 Months",category:"Tech",skills:["HTML","CSS","React"],desc:"Work on real Google products with senior developers. Build responsive UI.",location:"Bangalore (Remote)"},
+{id:2,role:"UI/UX Designer Intern",company:"Swiggy",logo:"https://logo.clearbit.com/swiggy.com",type:"Hybrid",stipend:"₹15,000/month",duration:"2 Months",category:"Design",skills:["Figma","Adobe XD"],desc:"Design food delivery app flows and user research.",location:"Mumbai"},
+{id:3,role:"Digital Marketing Intern",company:"Zomato",logo:"https://logo.clearbit.com/zomato.com",type:"Onsite",stipend:"₹12,000/month",duration:"3 Months",category:"Marketing",skills:["SEO","Content"],desc:"Handle social media campaigns and analytics.",location:"Delhi"},
+{id:4,role:"Backend Developer Intern",company:"Amazon",logo:"https://logo.clearbit.com/amazon.com",type:"Remote",stipend:"₹30,000/month",duration:"6 Months",category:"Tech",skills:["Node.js","MongoDB"],desc:"Build scalable APIs for Amazon services.",location:"Remote"},
+{id:5,role:"Data Science Intern",company:"Microsoft",logo:"https://logo.clearbit.com/microsoft.com",type:"Hybrid",stipend:"₹35,000/month",duration:"4 Months",category:"Tech",skills:["Python","ML"],desc:"Work on AI models and data analysis.",location:"Hyderabad"},
+{id:6,role:"Content Writer Intern",company:"Unacademy",logo:"https://logo.clearbit.com/unacademy.com",type:"Remote",stipend:"₹8,000/month",duration:"2 Months",category:"Marketing",skills:["Writing","Research"],desc:"Write educational content for students.",location:"Remote"}
+];
+
+let currentCategory='All';
+let selectedIntern=null;
+let applications=JSON.parse(localStorage.getItem('myInternApps')||'[]');
+
+function renderInternships(){
+ let q=document.getElementById('searchInput').value.toLowerCase();
+ let fType=document.getElementById('filterType').value;
+ let filtered=internships.filter(i=>{
+  return (i.role.toLowerCase().includes(q)||i.company.toLowerCase().includes(q)) &&
+  (fType==''||i.type==fType) &&
+  (currentCategory=='All'||i.category==currentCategory);
+ });
+ document.getElementById('internGrid').innerHTML=filtered.map(i=>`
+  <div class="card">
+   <span class="badge b-paid">${i.stipend}</span><span class="badge b-remote">${i.type}</span>
+   <div class="company"><img src="${i.logo}"><div><h3>${i.role}</h3><p style="font-size:13px;color:#64748b">${i.company} • ${i.location}</p></div></div>
+   <p class="meta"><span>⏱ ${i.duration}</span><span>📅 Apply by 10 Oct</span></p>
+   <div>${i.skills.map(s=>`<span class="skill">${s}</span>`).join('')}</div>
+   <div style="display:flex;gap:8px;margin-top:14px"><button class="btn-ghost btn" style="flex:1" onclick="openDetail(${i.id})">View Details</button><button class="btn" style="flex:1" onclick="openApply(${i.id})">Apply</button></div>
+  </div>
+ `).join('') || '<p>No internships found</p>';
+}
+
+function filterCat(cat,el){
+ currentCategory=cat;
+ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
+ renderInternships();
+}
+
+function openDetail(id){
+ let i=internships.find(x=>x.id==id);
+ document.getElementById('modalContent').innerHTML=`
+  <h2>${i.role}</h2><p style="color:#64748b">${i.company} - ${i.location}</p>
+  <p style="margin:12px 0"><span class="badge b-paid">${i.stipend}</span><span class="badge b-remote">${i.type}</span><span class="badge b-part">${i.duration}</span></p>
+  <h4>About Internship</h4><p style="margin:8px 0 12px;color:#475569">${i.desc} You will work with a team, learn industry tools, and get certificate + PPO chance.</p>
+  <h4>Skills Required</h4><div style="margin:8px 0">${i.skills.map(s=>`<span class="skill">${s}</span>`).join('')}</div>
+  <button class="btn" style="width:100%;margin-top:16px" onclick="closeModal();openApply(${i.id})">Apply Now</button>
+ `;
+ document.getElementById('detailModal').style.display='flex';
+}
+function closeModal(){document.getElementById('detailModal').style.display='none';}
+
+function openApply(id){
+ selectedIntern=internships.find(x=>x.id==id);
+ document.getElementById('applyFor').innerText=selectedIntern.role+' at '+selectedIntern.company;
+ document.getElementById('applyModal').style.display='flex';
+}
+function closeApply(){document.getElementById('applyModal').style.display='none';}
+
+function submitApplication(){
+ let name=document.getElementById('sName').value;
+ let email=document.getElementById('sEmail').value;
+ if(!name||!email){alert('Name and Email required');return;}
+ let app={id:Date.now(),intern: selectedIntern.role, company:selectedIntern.company, date:new Date().toLocaleDateString(), status: Math.random()>0.5?'Pending':'Accepted'};
+ applications.push(app);
+ localStorage.setItem('myInternApps',JSON.stringify(applications));
+ closeApply(); renderTrack(); alert('Applied Successfully!');
+}
+
+function renderTrack(){
+ document.getElementById('appliedCount').innerText=applications.length+' Applied';
+ if(applications.length==0){document.getElementById('trackList').innerHTML='<p style="color:#64748b">No applications yet. Apply to internships to track here.</p>';return;}
+ document.getElementById('trackList').innerHTML=applications.map(a=>`
+  <div class="track-item"><div><b>${a.intern}</b><br><small>${a.company} • ${a.date}</small></div><span class="status ${a.status=='Pending'?'s-pending':a.status=='Accepted'?'s-accepted':'s-rejected'}">${a.status}</span></div>
+ `).join('');
+}
+function scrollToTrack(){document.getElementById('track').scrollIntoView({behavior:'smooth'});}
+function clearApplications(){if(confirm('Clear all?')){applications=[];localStorage.removeItem('myInternApps');renderTrack();}}
+
+renderInternships(); renderTrack();
+</script>
+</body>
+</html>
